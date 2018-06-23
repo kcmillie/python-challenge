@@ -1,14 +1,33 @@
 import csv
 
 # open file
-with open('budget_data.csv', 'rb') as F:
+with open('budget_data.csv') as F:
     reader = csv.reader(F, delimiter=',')
+    monthCount = 0
+    TotalNet = 0
+    MaxIncrease = 0
+    MaxDecrease = 100000000
+    next(F)
     for x in reader:
-        print(x)
-        print(x[0])
-        print(x[0], x[1], x[2])
-# The total number of months included in the dataset
-# The total net amount of "Profit/Losses" over the entire period
-# The average change in "Profit/Losses" between months over the entire period
-# The greatest increase in profits (date and amount) over the entire period
-# The greatest decrease in losses (date and amount) over the entire period
+        x[1] = int(x[1])
+        monthCount = monthCount + 1
+        TotalNet = TotalNet + x[1]
+        if x[1] > MaxIncrease:
+            MaxIncrease = x[1]
+            IncDate = x[0]
+        if x[1] < MaxDecrease:
+            MaxDecrease = x[1]
+            DecDate = x[0]
+    print("Financial Analysis")
+    print('-' * 30)
+    # The total number of months included in the dataset
+    print('Total Month: ' + str(monthCount))
+    # The total net amount of "Profit/Losses" over the entire period
+    print('Total Revenue: $' + str(TotalNet))
+    # The average change in "Profit/Losses" between months over the entire period
+    average = TotalNet / monthCount
+    print('Total Average: $' + str(average))
+    # The greatest increase in profits (date and amount) over the entire period
+    print(MaxIncrease)
+    # The greatest decrease in losses (date and amount) over the entire period
+    print(MaxDecrease)
