@@ -18,6 +18,8 @@ with open('budget_data.csv') as F:
         if x[1] < MaxDecrease:
             MaxDecrease = x[1]
             DecDate = x[0]
+    MaxIncrease = str(MaxIncrease)
+    MaxDecrease = str(MaxDecrease)
     print("Financial Analysis")
     print('-' * 30)
     # The total number of months included in the dataset
@@ -26,8 +28,8 @@ with open('budget_data.csv') as F:
     print('Total Revenue: $' + str(TotalNet))
     # The average change in "Profit/Losses" between months over the entire period
     average = TotalNet / monthCount
-    print('Total Average: $' + str(average))
+    print('Total Average: $' + str(int(average)))
     # The greatest increase in profits (date and amount) over the entire period
-    print(MaxIncrease)
+    print("Greatest Increase in Profits: " + IncDate + " ($" + MaxIncrease + ")")
     # The greatest decrease in losses (date and amount) over the entire period
-    print(MaxDecrease)
+    print("Greatest Decrease in Profits: " + DecDate + " ($" + MaxDecrease + ")")
