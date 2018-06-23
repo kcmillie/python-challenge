@@ -1,7 +1,7 @@
 import csv
 
 # open file
-with open('budget_data.csv') as F:
+with open('budget_data.csv', newline = '') as F:
     reader = csv.reader(F, delimiter=',')
     monthCount = 0
     TotalNet = 0
