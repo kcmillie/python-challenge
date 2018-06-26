@@ -1,7 +1,7 @@
 import csv
 
 # open file
-with open('budget_data.csv', newline = '') as F:
+with open('budget_data.csv', newline='') as F:
     reader = csv.reader(F, delimiter=',')
     monthCount = 0
     TotalNet = 0
@@ -20,16 +20,20 @@ with open('budget_data.csv', newline = '') as F:
             DecDate = x[0]
     MaxIncrease = str(MaxIncrease)
     MaxDecrease = str(MaxDecrease)
-    print("Financial Analysis")
-    print('-' * 30)
-    # The total number of months included in the dataset
-    print('Total Month: ' + str(monthCount))
-    # The total net amount of "Profit/Losses" over the entire period
-    print('Total Revenue: $' + str(TotalNet))
-    # The average change in "Profit/Losses" between months over the entire period
+
     average = TotalNet / monthCount
-    print('Total Average: $' + str(int(average)))
-    # The greatest increase in profits (date and amount) over the entire period
-    print("Greatest Increase in Profits: " + IncDate + " ($" + MaxIncrease + ")")
-    # The greatest decrease in losses (date and amount) over the entire period
-    print("Greatest Decrease in Profits: " + DecDate + " ($" + MaxDecrease + ")")
+
+    with open('results.csv', 'wt') as csvfile:
+        x = [
+        "Financial Analysis", ('-' * 30),
+        ('Total Month: ' + str(monthCount)),
+        ('Total Revenue: $' + str(TotalNet)),
+        ('Total Average: $' + str(int(average))),
+        ("Greatest Increase in Profits: " + IncDate + " ($" + MaxIncrease + ")"),
+        ("Greatest Decrease in Profits: " + DecDate + " ($" + MaxDecrease + ")")
+        ]
+
+        writer = csv.writer(csvfile)
+        for row in x:
+            print(row)
+            writer.writerow([row])
