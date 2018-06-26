@@ -25,7 +25,7 @@ with open('election_data.csv', newline='') as E:
 
 # print('Election Results')
 
-with open('results.csv', 'w') as csvfile:
+with open('results.csv', 'wt') as csvfile:
     x = ['Election Results', '-' * 30, 
     ("Total Votes: %s" % TotalVotes), ('-' * 30)]
 
@@ -46,4 +46,4 @@ with open('results.csv', 'w') as csvfile:
     writer = csv.writer(csvfile)
     for row in x:
         print(row)
-        writer.writerows(row)
+        writer.writerow([row])
